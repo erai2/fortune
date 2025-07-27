@@ -17,44 +17,13 @@ ignorePorts = false
 runButton = "Run Frontend"
 
 [[workflows.workflow]]
-name = "Run Vue Frontend"
-author = 42442916
-mode = "sequential"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "cd frontend && npm run dev"
-
-[[workflows.workflow]]
-name = "Run Vue Frontend"
-author = 42442916
-mode = "sequential"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Run Vue Frontend"
-
-[[workflows.workflow]]
 name = "Run Frontend"
 author = 42442916
 mode = "sequential"
 
 [[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Run Frontend"
-
-[[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd frontend && npm run dev"
-
-[[workflows.workflow]]
-name = "Run Backend"
-author = 42442916
-mode = "sequential"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Run Backend"
 
 [[ports]]
 localPort = 5000
