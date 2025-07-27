@@ -1,3 +1,4 @@
+
 entrypoint = "index.js"
 modules = ["nodejs-20:v8-20230920-bd784b9", "python-3.11"]
 hidden = [".config", "package-lock.json"]
@@ -21,8 +22,8 @@ author = 42442916
 mode = "sequential"
 
 [[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Run Frontend"
+task = "shell.exec"
+args = "cd frontend && npm install && npm run dev"
 
 [[workflows.workflow]]
 name = "Run Backend"
@@ -41,9 +42,24 @@ args = "pip install -r requirements.txt"
 task = "shell.exec"
 args = "uvicorn main:app --host 0.0.0.0 --port 8000"
 
-[[ports]]
-localPort = 5000
-externalPort = 8000
+[[workflows.workflow]]
+name = "Full Stack App"
+author = 42442916
+mode = "parallel"
+set_run_button = true
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd backend && pip install -r requirements.txt && uvicorn main:app --host 0.0.0.0 --port 8000"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd frontend && npm install && npm run dev"
 
 [[ports]]
-localPort = 5001
+localPort = 5000
+externalPort = 80
+
+[[ports]]
+localPort = 8000
+externalPort = 8000
