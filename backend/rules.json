@@ -9,8 +9,9 @@
     {
       "condition": "일간=정, 월지=자",
       "result": "수생화의 조화 구조",
-      "rule_type": "오행판별",
-      "note": "정화가 수기운을 활용함"
+      "rule_type": "격국판별",
+      "note": "이 해석은 예시입니다."
     }
+    // Add more rules similarly
   ]
 }

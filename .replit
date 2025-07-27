@@ -12,7 +12,6 @@ language = "nodejs"
 run = ["node index.js"]  # This can remain if you have a node entry file
 
 [workflows]
-runButton = "Full Stack App"
 
 [[workflows.workflow]]
 name = "Full Stack App"

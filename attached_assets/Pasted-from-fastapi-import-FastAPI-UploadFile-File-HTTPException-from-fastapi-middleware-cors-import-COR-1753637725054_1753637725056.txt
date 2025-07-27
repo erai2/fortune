@@ -10,7 +10,7 @@ app = FastAPI()
 # Secure CORS configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://0.0.0.0:5000"],  # Specific origins only
+    allow_origins=["http://localhost:5000", "http://0.0.0.0:5000"],  # Specific origins only
     allow_credentials=False,
     allow_methods=["GET", "POST"],
     allow_headers=["Content-Type"],
@@ -54,23 +54,20 @@ async def extract_rules(file: UploadFile = File(...)):
 
     try:
         response = openai_client.chat.completions.create(
-            model="gpt-4",
+            model="gpt-4o",
             messages=[{"role": "user", "content": prompt}],
             temperature=0.3,
             max_tokens=2000
         )
         rules_text = response.choices[0].message.content
-
         if rules_text is None:
             logging.warning("OpenAI response was empty.")
             return {"rules": []}
-
         try:
             rules = json.loads(rules_text)
         except json.JSONDecodeError as e:
             logging.error(f"Invalid JSON received from OpenAI: {e}")
             raise HTTPException(status_code=500, detail="Invalid JSON from OpenAI")
-
         return {"rules": rules}
     except Exception as e:
         logging.error(f"OpenAI API error: {e}")

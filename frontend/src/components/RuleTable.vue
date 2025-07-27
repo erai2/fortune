@@ -1,6 +1,4 @@
--cd frontend
-npm install
-npm run dev
+
 <template>
   <div class="bg-gray-800 rounded-lg shadow-lg p-6">
     <div class="flex justify-between items-center mb-4">
