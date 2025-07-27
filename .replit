@@ -14,6 +14,7 @@ deploymentTarget = "cloudrun"
 ignorePorts = false
 
 [workflows]
+runButton = "Run Vue Frontend"
 
 [[workflows.workflow]]
 name = "Shell"
@@ -23,3 +24,21 @@ author = 42442916
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npm"
+
+[[workflows.workflow]]
+name = "Run Vue Frontend"
+author = 42442916
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd frontend && npm run dev"
+
+[[workflows.workflow]]
+name = "Run Vue Frontend"
+author = 42442916
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd frontend && npm run dev"
