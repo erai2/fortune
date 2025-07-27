@@ -1,5 +1,5 @@
 entrypoint = "index.js"
-modules = ["nodejs-20:v8-20230920-bd784b9"]
+modules = ["nodejs-20:v8-20230920-bd784b9", "python-3.11"]
 hidden = [".config", "package-lock.json"]
 
 [nix]
@@ -14,7 +14,6 @@ deploymentTarget = "cloudrun"
 ignorePorts = false
 
 [workflows]
-runButton = "Run Frontend"
 
 [[workflows.workflow]]
 name = "Run Frontend"
@@ -24,6 +23,23 @@ mode = "sequential"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd frontend && npm run dev"
+
+[[workflows.workflow]]
+name = "Run Backend"
+author = 42442916
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd backend"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pip install -r requirements.txt"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "uvicorn main:app --host 0.0.0.0 --port 8000"
 
 [[ports]]
 localPort = 5000
