@@ -12,3 +12,14 @@ language = "nodejs"
 run = ["node", "index.js"]
 deploymentTarget = "cloudrun"
 ignorePorts = false
+
+[workflows]
+
+[[workflows.workflow]]
+name = "Shell"
+mode = "sequential"
+author = 42442916
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm"
