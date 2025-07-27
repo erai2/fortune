@@ -34,14 +34,15 @@ args = "cd backend && pip install -r requirements.txt && uvicorn main:app --host
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "sleep 3"
+args = "cd frontend && npm install && npm run dev"
 
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "cd frontend && npm install && npm run dev -- --host 0.0.0.0 --port 3000"
+[[ports]]
+localPort = 3000
+externalPort = 3000
 
 [[ports]]
 localPort = 5000
+externalPort = 80
 
 [[ports]]
 localPort = 8000
