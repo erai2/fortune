@@ -59,4 +59,12 @@ mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd saju-modern-app/backend && pip install -r requirements.txt && uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+args = "cd saju-modern-app/backend && python3 -m pip install -r requirements.txt && python3 -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+
+[[ports]]
+localPort = 5000
+externalPort = 8000
+
+[[ports]]
+localPort = 5001
+externalPort = 80
