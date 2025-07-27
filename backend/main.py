@@ -1,9 +1,17 @@
-from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi import UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from openai import OpenAI
 import os
 import json
 import logging
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+async def read_root():
+    return {"message": "Hello, World!"}
+
 
 app = FastAPI()
 
@@ -22,11 +30,13 @@ openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 
+
 @app.post("/extract_rules")
 async def extract_rules(file: UploadFile = File(...)):
     # Validate file type and size
     if not file.content_type or not file.content_type.startswith('text/'):
-        raise HTTPException(status_code=400, detail="Only text files are allowed")
+        raise HTTPException(status_code=400,
+                            detail="Only text files are allowed")
 
     MAX_FILE_SIZE = 10 * 1024 * 1024
     file_content = await file.read()
@@ -53,12 +63,15 @@ async def extract_rules(file: UploadFile = File(...)):
 """
 
     try:
-        response = openai_client.chat.completions.create(
-            model="gpt-4",
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.3,
-            max_tokens=2000
-        )
+        response = openai_client.chat.completions.create(model="gpt-4",
+                                                         messages=[{
+                                                             "role":
+                                                             "user",
+                                                             "content":
+                                                             prompt
+                                                         }],
+                                                         temperature=0.3,
+                                                         max_tokens=2000)
         rules_text = response.choices[0].message.content
 
         if rules_text is None:
@@ -69,7 +82,8 @@ async def extract_rules(file: UploadFile = File(...)):
             rules = json.loads(rules_text)
         except json.JSONDecodeError as e:
             logging.error(f"Invalid JSON received from OpenAI: {e}")
-            raise HTTPException(status_code=500, detail="Invalid JSON from OpenAI")
+            raise HTTPException(status_code=500,
+                                detail="Invalid JSON from OpenAI")
 
         return {"rules": rules}
     except Exception as e:
@@ -110,7 +124,8 @@ async def add_rule(rule: dict):
 
         # Limit total rules (prevent DoS)
         if len(data.get("rules", [])) >= 10000:
-            raise HTTPException(status_code=400, detail="Maximum rules limit reached")
+            raise HTTPException(status_code=400,
+                                detail="Maximum rules limit reached")
 
         data['rules'].append(rule)
         with open("rules.json", "w", encoding="utf-8") as f:
