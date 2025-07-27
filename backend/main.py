@@ -10,7 +10,7 @@ app = FastAPI()
 # Secure CORS configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://0.0.0.0:5000"],  # Specific origins only
+    allow_origins=["http://0.0.0.0:5000", "http://localhost:5000"],
     allow_credentials=False,
     allow_methods=["GET", "POST"],
     allow_headers=["Content-Type"],
