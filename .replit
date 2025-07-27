@@ -15,6 +15,7 @@ deploymentTarget = "cloudrun"
 ignorePorts = false
 
 [workflows]
+runButton = "Full Stack App"
 
 [[workflows.workflow]]
 name = "Run Frontend"
