@@ -1,3 +1,4 @@
+
 {
   "rules": [
     {
@@ -10,8 +11,7 @@
       "condition": "일간=정, 월지=자",
       "result": "수생화의 조화 구조",
       "rule_type": "격국판별",
-      "note": "이 해석은 예시입니다."
+      "note": "화수 상극 주의"
     }
-    // Add more rules similarly
   ]
 }
