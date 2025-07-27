@@ -10,10 +10,7 @@ app = FastAPI()
 
 @app.get("/")
 async def read_root():
-    return {"message": "Hello, World!"}
-
-
-app = FastAPI()
+    return {"message": "AI 사주 규칙 대시보드 API"}
 
 # Secure CORS configuration
 app.add_middleware(
