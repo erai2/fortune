@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 
-const PORT = process.env.PORT ? parseInt(process.env.PORT) : 5000; // Use environment port or fallback to 5000
+const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000; // Use environment port or fallback to 3000
 
 export default defineConfig({
   plugins: [vue()],

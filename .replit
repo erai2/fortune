@@ -19,6 +19,7 @@ runButton = "Full Stack App"
 name = "Full Stack App"
 author = 42442916
 mode = "sequential"
+
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "pkill -f \"uvicorn main:app\" || true"
@@ -29,7 +30,7 @@ args = "pkill -f \"vite\" || true"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd backend && pip install -r requirements.txt && uvicorn main:app --host 0.0.0.0 --port 8000 &"
+args = "cd backend && pip install -r requirements.txt && uvicorn main:app --host 0.0.0.0 --port 5000 &"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
@@ -37,7 +38,7 @@ args = "sleep 3"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd frontend && npm install && npm run dev -- --host 0.0.0.0 --port 5000"
+args = "cd frontend && npm install && npm run dev -- --host 0.0.0.0 --port 3000"
 
 [[ports]]
 localPort = 5000
