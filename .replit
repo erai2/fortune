@@ -1,4 +1,5 @@
-entrypoint = "index.js"  # Set to your main entry point
+
+entrypoint = "index.js"
 modules = ["nodejs-20:v8-20230920-bd784b9", "python-3.11"]
 hidden = [".config", "package-lock.json"]
 
@@ -9,7 +10,7 @@ channel = "stable-23_05"
 language = "nodejs"
 
 [deployment]
-run = ["node index.js"]  # This can remain if you have a node entry file
+run = ["node index.js"]
 
 [workflows]
 runButton = "Full Stack App"
@@ -18,8 +19,6 @@ runButton = "Full Stack App"
 name = "Full Stack App"
 author = 42442916
 mode = "sequential"
-set_run_button = true
-
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "pkill -f \"uvicorn main:app\" || true"
@@ -41,9 +40,7 @@ task = "shell.exec"
 args = "cd frontend && npm install && npm run dev -- --host 0.0.0.0 --port 5000"
 
 [[ports]]
-localPort = 5000
-externalPort = 5173
+localPort = 5000 
 
 [[ports]]
 localPort = 8000
-externalPort = 80
