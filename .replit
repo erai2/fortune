@@ -17,15 +17,6 @@ ignorePorts = false
 runButton = "Run Frontend"
 
 [[workflows.workflow]]
-name = "Shell"
-mode = "sequential"
-author = 42442916
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npm"
-
-[[workflows.workflow]]
 name = "Run Vue Frontend"
 author = 42442916
 mode = "sequential"
@@ -40,8 +31,8 @@ author = 42442916
 mode = "sequential"
 
 [[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "cd frontend && npm run dev"
+task = "workflow.run"
+args = "Run Vue Frontend"
 
 [[workflows.workflow]]
 name = "Run Frontend"
@@ -49,8 +40,12 @@ author = 42442916
 mode = "sequential"
 
 [[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Run Frontend"
+
+[[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd frontend && npm install && npm run dev"
+args = "cd frontend && npm run dev"
 
 [[workflows.workflow]]
 name = "Run Backend"
@@ -58,12 +53,12 @@ author = 42442916
 mode = "sequential"
 
 [[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "cd backend && python3 -m pip install -r requirements.txt && python3 -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+task = "workflow.run"
+args = "Run Backend"
 
 [[ports]]
 localPort = 5000
-externalPort = 80
+externalPort = 8000
 
 [[ports]]
 localPort = 5001
