@@ -21,8 +21,8 @@ author = 42442916
 mode = "sequential"
 
 [[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "cd frontend && npm run dev"
+task = "workflow.run"
+args = "Run Frontend"
 
 [[workflows.workflow]]
 name = "Run Backend"
