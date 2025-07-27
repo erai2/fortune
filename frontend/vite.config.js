@@ -11,11 +11,11 @@ export default defineConfig({
     allowedHosts: 'all',
     proxy: {
       '/extract_rules': {
-        target: 'http://localhost:8000',
+        target: 'http://localhost:5000',
         changeOrigin: true,
       },
       '/rules': {
-        target: 'http://localhost:8000',
+        target: 'http://localhost:5000',
         changeOrigin: true,
       }
     }
