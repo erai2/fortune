@@ -38,7 +38,6 @@ args = "cd frontend && npm install && npm run dev"
 
 [[ports]]
 localPort = 5000
-externalPort = 5000
 
 [[ports]]
 localPort = 8000
