@@ -1,4 +1,3 @@
-
 <template>
   <div class="min-h-screen bg-dark text-white">
     <nav class="bg-gray-800 flex items-center justify-between px-8 py-4 shadow">
@@ -47,4 +46,3 @@ async function fetchRules() {
 
 onMounted(fetchRules)
 </script>
-</template>

@@ -5,12 +5,14 @@ import os
 import json
 import logging
 from fastapi import FastAPI
+from dotenv import load_dotenv
+load_dotenv()
 
 app = FastAPI()
 
 @app.get("/")
 async def read_root():
-    return {"message": "AI 사주 규칙 대시보드 API"}
+    return {"message": "AI 규칙 대시보드 API"}
 
 # Secure CORS configuration
 app.add_middleware(
