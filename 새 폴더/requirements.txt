@@ -1,0 +1,12 @@
+streamlit
+langchain
+langchain-openai
+langchain-community
+faiss-cpu
+sentence-transformers
+scikit-learn
+pypdf
+unstructured
+pandas
+openai
+tiktoken
