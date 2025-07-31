@@ -1,47 +1,53 @@
-
 <template>
-  <div class="bg-gray-800 rounded-lg shadow-lg p-6">
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-xl font-bold text-primary">규칙 관리</h2>
-      <button @click="$emit('refresh')" class="bg-primary text-white px-4 py-2 rounded hover:bg-blue-600">
-        새로고침
-      </button>
-    </div>
+  <div>
+    <h2 class="text-xl font-bold mb-4">규칙 목록</h2>
     
-    <div v-if="rules.length === 0" class="text-gray-400 text-center py-8">
-      등록된 규칙이 없습니다.
+    <div class="mb-4 flex gap-2">
+      <input v-model="newRule" placeholder="새 규칙 입력" class="border px-3 py-2 rounded text-black" />
+      <button @click="addRule" class="bg-green-500 px-4 py-2 rounded text-white hover:bg-green-600">추가</button>
     </div>
-    
-    <div v-else class="overflow-x-auto">
-      <table class="w-full text-left">
-        <thead>
-          <tr class="border-b border-gray-600">
-            <th class="py-3 px-4 text-primary">조건</th>
-            <th class="py-3 px-4 text-primary">결과</th>
-            <th class="py-3 px-4 text-primary">유형</th>
-            <th class="py-3 px-4 text-primary">비고</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(rule, i) in rules" :key="i" class="border-b border-gray-700 hover:bg-gray-700">
-            <td class="py-3 px-4">{{ rule.condition }}</td>
-            <td class="py-3 px-4">{{ rule.result }}</td>
-            <td class="py-3 px-4">{{ rule.rule_type }}</td>
-            <td class="py-3 px-4 text-gray-300">{{ rule.note }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+
+    <ul class="space-y-2">
+      <li v-for="rule in rules" :key="rule.id" class="flex justify-between items-center bg-gray-700 p-3 rounded">
+        <span>{{ rule.content }}</span>
+        <button @click="deleteRule(rule.id)" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">삭제</button>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script setup>
-defineProps({
-  rules: {
-    type: Array,
-    default: () => []
-  }
+import { ref } from 'vue'
+
+const props = defineProps({
+  rules: Array
 })
 
-defineEmits(['refresh'])
+const emit = defineEmits(['refresh'])
+const backendUrl = import.meta.env.VITE_BACKEND_URL
+const newRule = ref('')
+
+async function addRule() {
+  if (!newRule.value.trim()) return
+  try {
+    await fetch(`${backendUrl}/rules`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content: newRule.value })
+    })
+    newRule.value = ''
+    emit('refresh')
+  } catch (error) {
+    console.error('규칙 추가 실패:', error)
+  }
+}
+
+async function deleteRule(id) {
+  try {
+    await fetch(`${backendUrl}/rules/${id}`, { method: 'DELETE' })
+    emit('refresh')
+  } catch (error) {
+    console.error('규칙 삭제 실패:', error)
+  }
+}
 </script>
