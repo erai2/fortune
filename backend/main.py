@@ -17,10 +17,10 @@ async def read_root():
 # Secure CORS configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://0.0.0.0:5000", "http://localhost:5000", "https://*.replit.dev", "https://*.replit.app"],
-    allow_credentials=False,
-    allow_methods=["GET", "POST"],
-    allow_headers=["Content-Type"],
+    allow_origins=["*"],  # 보안상 실제 배포 시에는 도메인을 지정하는 것이 좋습니다.
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Initialize OpenAI client securely
