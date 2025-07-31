@@ -8,6 +8,11 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
+if (!process.env.OPENAI_API_KEY) {
+  console.error('OPENAI_API_KEY not set');
+  process.exit(1);
+}
+
 app.use(cors());
 app.use(express.json());
 

@@ -133,3 +133,8 @@ async def add_rule(rule: dict):
     except Exception as e:
         logging.error(f"Error adding rule: {e}")
         raise HTTPException(status_code=500, detail="Failed to add rule")
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
