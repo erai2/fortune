@@ -21,6 +21,23 @@ npm install
 npm run dev
 ```
 
+### 3. 루트에서 동시 실행
+루트 디렉터리의 Node 스크립트를 이용하면 백엔드와 프론트를 동시에 실행할 수 있습니다.
+```bash
+npm install
+npm run dev
+```
+
+### 4. Windows 자동 실행
+루트 디렉터리의 `run_dev.bat` 파일을 실행하면 백엔드와 프론트엔드가 각기 다른 콘솔 창에서 동시에 시작됩니다. 최초 실행 시에는 `backend/requirements.txt` 설치와 `frontend` 디렉터리의 `npm install`을 먼저 수행하세요.
+
+### 5. Docker Compose 실행
+Docker가 설치되어 있다면 다음 명령으로 두 서비스를 함께 시작할 수 있습니다.
+```bash
+docker compose up --build
+```
+이후 [http://localhost:5173](http://localhost:5173) 로 접속하면 됩니다.
+
 접속: http://localhost:5173
 
 ## 🧠 AI 추출 모델 학습

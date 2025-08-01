@@ -6,8 +6,11 @@
   "dependencies": {
     "openai": "^5.10.2"
   },
+  "devDependencies": {
+    "concurrently": "^9"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently \"cd backend && uvicorn main:app --reload\" \"cd frontend && npm run dev\""
   },
   "keywords": [],
   "author": "",
