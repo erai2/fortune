@@ -32,3 +32,21 @@ POST http://localhost:8000/train
 ```
 
 서버 콘솔에 규칙 목록 출력됨
+
+## 📚 명리학 지식 네트워크 데모
+- `kb_backend/`: Express 기반 파일 저장 백엔드 (AI 구조화/검색)
+- `kb_frontend/`: React 기반 카드/네트워크/트리 시각화 데모
+
+### 실행 방법
+1. 백엔드
+```bash
+cd kb_backend
+npm install
+npm start
+```
+2. 프론트엔드
+```bash
+cd kb_frontend
+npm install
+npm run dev
+```
