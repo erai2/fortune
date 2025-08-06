@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+pydantic
+scikit-learn
+sentence-transformers
+sqlalchemy[asyncio]
+asyncpg
+python-dotenv
