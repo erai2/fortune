@@ -20,11 +20,6 @@ with tab1:
     with col1:
         tiangan = st.text_input("천간 (예: 壬 甲 辛 戊)", key="in1")
         dizhi = st.text_input("지지 (예: 子 午 酉 申)", key="in2")
-        topic = st.text_input("주제/관점 (예: 재물의 현실 작동력)", value="재물의 현실 작동력", key="in3")
-        api_key = st.text_input("OpenAI API Key (자동 해석용)", type="password")
-    with col2:
-        auto_gen = st.button("🔵 LLM 자동 구조 해석")
-
     table_summary = st.text_area("1. 구조 표 요약", height=60, key="f1")
     tiangan_analysis = st.text_area("2. 천간 분석", height=80, key="f2")
     dizhi_analysis = st.text_area("3. 지지 분석", height=80, key="f3")
@@ -34,7 +29,6 @@ with tab1:
 
     if auto_gen and api_key and tiangan and dizhi and topic:
         with st.spinner("LLM 구조 해석 중..."):
-            fields, prompt_used = llm_auto_analysis(api_key, tiangan, dizhi, topic)
             st.session_state.f1, st.session_state.f2, st.session_state.f3, st.session_state.f4, st.session_state.f5 = fields
             st.session_state.f6 = prompt_used
             st.success("자동 구조 해석이 완료되었습니다. 내용 수정 후 저장 가능!")

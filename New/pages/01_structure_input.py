@@ -1,18 +1,17 @@
 import streamlit as st
+import pandas as pd
 from modules.suam_analysis import load_analysis, save_analysis, llm_auto_analysis
+from modules.config import load_api_key
 
 st.title("🌀 구조 해석 입력 및 자동 분석")
 
 db = load_analysis()
 
+
 col1, col2 = st.columns([2,1])
 with col1:
     tiangan = st.text_input("천간", key="in1_page1")
     dizhi = st.text_input("지지", key="in2_page1")
-    topic = st.text_input("주제/관점", "재물의 현실 작동력", key="in3_page1")
-    api_key = st.text_input("OpenAI API Key", type="password")
-with col2:
-    auto_btn = st.button("🔵 LLM 자동 구조 해석")
 
 table_summary = st.text_area("1. 구조 표 요약", height=60, key="f1_page1")
 tiangan_analysis = st.text_area("2. 천간 분석", height=80, key="f2_page1")
@@ -23,7 +22,6 @@ prompt_field = st.text_area("프롬프트(질문 내용)", height=100, key="f6_p
 
 if auto_btn and api_key and tiangan and dizhi and topic:
     with st.spinner("LLM 구조 해석 중..."):
-        fields, prompt_used = llm_auto_analysis(api_key, tiangan, dizhi, topic)
         st.session_state.f1_page1, st.session_state.f2_page1, st.session_state.f3_page1, st.session_state.f4_page1, st.session_state.f5_page1 = fields
         st.session_state.f6_page1 = prompt_used
         st.success("자동 구조 해석이 완료되었습니다. 내용 수정 후 저장 가능!")
