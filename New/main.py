@@ -2,12 +2,12 @@ import streamlit as st
 import pandas as pd
 from modules.suam_analysis import load_analysis, save_analysis, llm_auto_analysis
 
-st.set_page_config(page_title="수암명리 통합분석 시스템", layout="wide")
+st.set_page_config(page_title="수리 통합분석 시스템", layout="wide")
 
-st.sidebar.title("수암명리 분석 메뉴")
+st.sidebar.title("분석 메뉴")
 st.sidebar.info("연구/실무에 필요한 구조 해석, 명리용어, 연관검색 지원")
 
-st.title("🌀 수암명리 구조 해석 시스템 (자동/수동 입력, 연관 자료 통합)")
+st.title("🌀  구조 해석 시스템 (자동/수동 입력, 연관 자료 통합)")
 
 suam_data = load_analysis()
 
@@ -15,7 +15,7 @@ suam_data = load_analysis()
 tab1, tab2 = st.tabs(["구조 해석 입력/자동분석", "검색/수정/통합검색"])
 
 with tab1:
-    st.subheader("수암명리 구조 해석 입력 및 LLM 자동 생성")
+    st.subheader("수리구조 해석 입력 및 LLM 자동 생성")
     col1, col2 = st.columns([2,1])
     with col1:
         tiangan = st.text_input("천간 (예: 壬 甲 辛 戊)", key="in1")
