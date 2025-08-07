@@ -1,0 +1,15 @@
+# -*- coding: utf-8 -*-
+"""Manage terminology entries."""
+
+import streamlit as st
+from modules import terminology
+
+st.title("명리 용어 검색")
+
+with st.form("term_form"):
+    term = st.text_input("용어")
+    definition = st.text_area("설명")
+    submitted = st.form_submit_button("저장")
+    if submitted:
+        terminology.save_term({"term": term, "definition": definition})
+        st.success("저장되었습니다")

@@ -1,0 +1,11 @@
+# -*- coding: utf-8 -*-
+"""Search existing analyses."""
+
+import streamlit as st
+from modules import db_utils
+
+st.title("구조 해석 검색")
+
+records = db_utils._load_json(db_utils.DATA_DIR / 'suam_analysis.json')
+for rec in records:
+    st.write(f"- {rec.get('term')}: {rec.get('definition')}")

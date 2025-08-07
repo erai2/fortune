@@ -1,0 +1,12 @@
+# -*- coding: utf-8 -*-
+"""Placeholder for similarity and RAG analysis."""
+
+import streamlit as st
+from modules import embedding_utils
+
+st.title("유사도 RAG 분석")
+
+text = st.text_input("질문")
+if text:
+    emb = embedding_utils.embed_texts([text])[0]
+    st.write("임베딩 길이", len(emb))

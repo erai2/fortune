@@ -1,0 +1,17 @@
+# -*- coding: utf-8 -*-
+"""Simple integrated search across datasets."""
+
+import streamlit as st
+from modules import db_utils
+
+st.title("통합 연관 검색")
+
+keywords = st.text_input("키워드")
+if keywords:
+    results = []
+    for name in ['suam_analysis.json', 'terminology.json', 'basic_theory.json', 'case_studies.json']:
+        records = db_utils._load_json(db_utils.DATA_DIR / name)
+        for rec in records:
+            if keywords in str(rec):
+                results.append((name, rec))
+    st.write(results or "검색 결과 없음")
