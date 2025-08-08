@@ -6,20 +6,11 @@ from modules.config import load_api_key
 st.title("🌀 구조 해석 입력 및 자동 분석")
 
 db = load_analysis()
-api_key = load_api_key()
-
 col1, col2 = st.columns([2,1])
 with col1:
     tiangan = st.text_input("천간", key="in1_page1")
     dizhi = st.text_input("지지", key="in2_page1")
-    gender = st.selectbox("성별", ["남", "여"], key="gender_page1")
-    topic = st.text_input("주제/관점", "재물의 현실 작동력", key="in3_page1")
-with col2:
-    auto_btn = st.button("🔵 LLM 자동 구조 해석")
-
-if not api_key:
-    st.warning("secret.toml에서 OpenAI API Key를 설정해주세요.")
-
+    
 table_summary = st.text_area("1. 구조 표 요약", height=60, key="f1_page1")
 tiangan_analysis = st.text_area("2. 천간 분석", height=80, key="f2_page1")
 dizhi_analysis = st.text_area("3. 지지 분석", height=80, key="f3_page1")
@@ -29,7 +20,6 @@ prompt_field = st.text_area("프롬프트(질문 내용)", height=100, key="f6_p
 
 if auto_btn and api_key and tiangan and dizhi and topic:
     with st.spinner("LLM 구조 해석 중..."):
-        fields, prompt_used = llm_auto_analysis(api_key, tiangan, dizhi, gender, topic)
         st.session_state.f1_page1, st.session_state.f2_page1, st.session_state.f3_page1, st.session_state.f4_page1, st.session_state.f5_page1 = fields
         st.session_state.f6_page1 = prompt_used
         st.success("자동 구조 해석이 완료되었습니다. 내용 수정 후 저장 가능!")
@@ -49,4 +39,4 @@ if st.button("💾 구조 해석 저장"):
     db.append(entry)
     save_analysis(db)
     st.success("구조 해석이 저장되었습니다.")
-    st.dataframe(pd.DataFrame(db))
+

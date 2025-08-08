@@ -1,35 +1,15 @@
 import streamlit as st
 import pandas as pd
 from modules.suam_analysis import load_analysis, save_analysis, llm_auto_analysis
-from modules.config import load_api_key
-
-st.set_page_config(page_title="수암명리 통합분석 시스템", layout="wide")
-
-st.sidebar.title("수암명리 분석 메뉴")
-st.sidebar.info("연구/실무에 필요한 구조 해석, 명리용어, 연관검색 지원")
-
-st.title("🌀 수암명리 구조 해석 시스템 (자동/수동 입력, 연관 자료 통합)")
-
-suam_data = load_analysis()
-api_key = load_api_key()
 
 # --- Tabs for input/auto analysis and search/edit ---
 tab1, tab2 = st.tabs(["구조 해석 입력/자동분석", "검색/수정/통합검색"])
 
 with tab1:
-    st.subheader("수암명리 구조 해석 입력 및 LLM 자동 생성")
     col1, col2 = st.columns([2,1])
     with col1:
         tiangan = st.text_input("천간 (예: 壬 甲 辛 戊)", key="in1")
         dizhi = st.text_input("지지 (예: 子 午 酉 申)", key="in2")
-        gender = st.selectbox("성별", ["남", "여"], key="gender")
-        topic = st.text_input("주제/관점 (예: 재물의 현실 작동력)", value="재물의 현실 작동력", key="in3")
-    with col2:
-        auto_gen = st.button("🔵 LLM 자동 구조 해석")
-
-    if not api_key:
-        st.warning("secret.toml에서 OpenAI API Key를 설정해주세요.")
-
     table_summary = st.text_area("1. 구조 표 요약", height=60, key="f1")
     tiangan_analysis = st.text_area("2. 천간 분석", height=80, key="f2")
     dizhi_analysis = st.text_area("3. 지지 분석", height=80, key="f3")
@@ -39,7 +19,6 @@ with tab1:
 
     if auto_gen and api_key and tiangan and dizhi and topic:
         with st.spinner("LLM 구조 해석 중..."):
-            fields, prompt_used = llm_auto_analysis(api_key, tiangan, dizhi, gender, topic)
             st.session_state.f1, st.session_state.f2, st.session_state.f3, st.session_state.f4, st.session_state.f5 = fields
             st.session_state.f6 = prompt_used
             st.success("자동 구조 해석이 완료되었습니다. 내용 수정 후 저장 가능!")
@@ -65,7 +44,6 @@ with tab1:
             suam_data.append(entry)
             st.success("구조 해석이 저장되었습니다.")
         save_analysis(suam_data)
-        st.dataframe(pd.DataFrame(suam_data))
 
 with tab2:
     st.subheader("구조 해석 데이터 검색/수정/통합")
