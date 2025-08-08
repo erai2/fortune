@@ -29,3 +29,9 @@ __pycache__/
 .replit
 .config/
 *.timestamp-*
+kb_backend/
+kb_frontend/
+
+# Secrets
+.env
+secret.toml
