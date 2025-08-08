@@ -29,3 +29,7 @@ __pycache__/
 .replit
 .config/
 *.timestamp-*
+
+# Secrets
+.env
+secret.toml
