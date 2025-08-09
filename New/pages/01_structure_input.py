@@ -6,13 +6,11 @@ from modules.config import load_api_key
 st.title("🌀 구조 해석 입력 및 자동 분석")
 
 db = load_analysis()
-
-
 col1, col2 = st.columns([2,1])
 with col1:
     tiangan = st.text_input("천간", key="in1_page1")
     dizhi = st.text_input("지지", key="in2_page1")
-
+    
 table_summary = st.text_area("1. 구조 표 요약", height=60, key="f1_page1")
 tiangan_analysis = st.text_area("2. 천간 분석", height=80, key="f2_page1")
 dizhi_analysis = st.text_area("3. 지지 분석", height=80, key="f3_page1")
@@ -41,3 +39,4 @@ if st.button("💾 구조 해석 저장"):
     db.append(entry)
     save_analysis(db)
     st.success("구조 해석이 저장되었습니다.")
+

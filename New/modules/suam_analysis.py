@@ -15,7 +15,6 @@ def load_analysis() -> List[dict]:
 def save_analysis(data: List[dict]):
     """Persist analysis entries."""
     save_json(DB_PATH, data)
-dizhi, topic)
     llm = ChatOpenAI(openai_api_key=api_key, temperature=0.2, model="gpt-3.5-turbo")
     response = llm.invoke(prompt)
     text = response.content
